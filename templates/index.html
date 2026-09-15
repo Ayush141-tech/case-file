@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASEFILE — Missing Person Location Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- =================== HEADER =================== -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-badge">ML Prioritization Tool</div>
+      <h1 class="hero-title">CASEFILE</h1>
+      <p class="hero-subtitle">Missing Person Location Prediction System</p>
+      <p class="hero-ethics">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        Statistical prioritization aid — probabilities, not certainties
+      </p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- =================== PERFORMANCE DASHBOARD =================== -->
+    <section id="dashboard" class="section">
+      <div class="section-header">
+        <h2>Model Performance</h2>
+        <span class="section-hint" id="repeat-info">...</span>
+      </div>
+
+      <!-- Key metric cards -->
+      <div class="metric-cards" id="metric-cards">
+        <div class="metric-card" style="--accent:#06b6d4">
+          <div class="metric-label">Best Model</div>
+          <div class="metric-value" id="card-best">...</div>
+          <div class="metric-sub" id="card-best-sub">by Top-1 accuracy</div>
+        </div>
+        <div class="metric-card" style="--accent:#22c55e">
+          <div class="metric-label">Top-1 Accuracy</div>
+          <div class="metric-value" id="card-top1">...</div>
+          <div class="metric-sub" id="card-top1-sub">mean +/- std</div>
+        </div>
+        <div class="metric-card" style="--accent:#a855f7">
+          <div class="metric-label">Top-3 Accuracy</div>
+          <div class="metric-value" id="card-top3">...</div>
+          <div class="metric-sub" id="card-top3-sub">mean +/- std</div>
+        </div>
+        <div class="metric-card" style="--accent:#f97316">
+          <div class="metric-label">Top-5 Accuracy</div>
+          <div class="metric-value" id="card-top5">...</div>
+          <div class="metric-sub" id="card-top5-sub">mean +/- std</div>
+        </div>
+      </div>
+
+      <!-- Per-model comparison table -->
+      <div class="table-wrap">
+        <table id="model-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Top-1</th>
+              <th>Top-3</th>
+              <th>Top-5</th>
+              <th>Macro F1</th>
+              <th>Weighted F1</th>
+            </tr>
+          </thead>
+          <tbody id="model-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- =================== PREDICTOR =================== -->
+    <section id="predictor" class="section">
+      <div class="section-header">
+        <h2>New Case Prediction</h2>
+        <span class="section-hint">Enter case details below</span>
+      </div>
+
+      <div class="split">
+        <!-- LEFT: form -->
+        <form id="case-form" class="panel form-panel">
+          <fieldset>
+            <legend>Person</legend>
+            <div class="form-grid">
+              <label>
+                <span class="field-label">Age Group</span>
+                <select name="Age_Group" required>
+                  <option value="18-25">18-25</option>
+                  <option value="26-35" selected>26-35</option>
+                  <option value="36-45">36-45</option>
+                  <option value="46-55">46-55</option>
+                  <option value="56+">56+</option>
+                </select>
+              </label>
+              <label>
+                <span class="field-label">Gender</span>
+                <select name="Gender" required>
+                  <option value="Male" selected>Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Location</legend>
+            <div class="form-grid">
+              <label>
+                <span class="field-label">Last Latitude</span>
+                <input type="number" name="Last_Latitude" step="0.0001" value="23.2500" required>
+              </label>
+              <label>
+                <span class="field-label">Last Longitude</span>
+                <input type="number" name="Last_Longitude" step="0.0001" value="77.4100" required>
+              </label>
+              <label>
+                <span class="field-label">Usual Area</span>
+                <select name="Usual_Area" required id="select-usual"></select>
+              </label>
+              <label>
+                <span class="field-label">Previous Area</span>
+                <select name="Previous_Area" required id="select-prev"></select>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Time &amp; Conditions</legend>
+            <div class="form-grid">
+              <label>
+                <span class="field-label">Last Seen Time</span>
+                <input type="time" name="Last_Seen_Time" value="14:30" required>
+              </label>
+              <label>
+                <span class="field-label">Day</span>
+                <select name="Day" required>
+                  <option value="Monday">Monday</option>
+                  <option value="Tuesday">Tuesday</option>
+                  <option value="Wednesday">Wednesday</option>
+                  <option value="Thursday">Thursday</option>
+                  <option value="Friday" selected>Friday</option>
+                  <option value="Saturday">Saturday</option>
+                  <option value="Sunday">Sunday</option>
+                </select>
+              </label>
+              <label>
+                <span class="field-label">Weather</span>
+                <select name="Weather" required>
+                  <option value="Clear" selected>Clear</option>
+                  <option value="Cloudy">Cloudy</option>
+                  <option value="Rain">Rain</option>
+                  <option value="Fog">Fog</option>
+                </select>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Movement</legend>
+            <div class="form-grid">
+              <label>
+                <span class="field-label">Average Distance (km)</span>
+                <input type="number" name="Average_Distance" step="0.1" value="9.0" required>
+              </label>
+              <label>
+                <span class="field-label">Average Speed (km/h)</span>
+                <input type="number" name="Average_Speed" step="0.1" value="20.0" required>
+              </label>
+              <label>
+                <span class="field-label">Time Since Seen (hrs)</span>
+                <input type="number" name="Time_Since_Last_Seen" step="0.1" value="4.0" min="0.1" required>
+              </label>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="btn-predict" id="btn-predict">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            Generate Prediction Report
+          </button>
+        </form>
+
+        <!-- RIGHT: results -->
+        <div class="panel results-panel" id="results-panel">
+          <div id="results-empty" class="results-empty">
+            <div class="empty-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <p class="empty-text">Fill in the case form and hit <strong>Generate Prediction Report</strong> to see the Top-5 probable areas.</p>
+          </div>
+
+          <div id="results-content" class="results-content" hidden>
+            <h3 class="results-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Probable Location Report
+            </h3>
+            <div id="case-info" class="case-info"></div>
+            <div id="predictions-list" class="predictions-list"></div>
+            <div class="ethical-notice" id="ethical-notice"></div>
+          </div>
+
+          <div id="results-error" class="results-error" hidden>
+            <div class="error-icon">!</div>
+            <p id="error-text"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================== FOOTER =================== -->
+  <footer class="footer">
+    <div class="container">
+      <p>CASEFILE &mdash; Missing Person Location Prediction System | All data is 100% synthetic &amp; fictional</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

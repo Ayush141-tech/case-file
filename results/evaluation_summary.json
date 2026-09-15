@@ -1,0 +1,80 @@
+{
+  "repeats": 5,
+  "seeds": [
+    42,
+    7,
+    21,
+    99,
+    123
+  ],
+  "test_size": 0.2,
+  "models": [
+    {
+      "model": "Gradient Boosting",
+      "top1_mean": 0.344,
+      "top1_std": 0.0145,
+      "top3_mean": 0.6826,
+      "top3_std": 0.0155,
+      "top5_mean": 0.8598,
+      "top5_std": 0.0095,
+      "macro_f1_mean": 0.3565,
+      "macro_f1_std": 0.011,
+      "weighted_f1_mean": 0.3391,
+      "weighted_f1_std": 0.0148
+    },
+    {
+      "model": "Logistic Regression",
+      "top1_mean": 0.3662,
+      "top1_std": 0.0259,
+      "top3_mean": 0.705,
+      "top3_std": 0.0082,
+      "top5_mean": 0.871,
+      "top5_std": 0.0067,
+      "macro_f1_mean": 0.3811,
+      "macro_f1_std": 0.025,
+      "weighted_f1_mean": 0.3625,
+      "weighted_f1_std": 0.0259
+    },
+    {
+      "model": "Random Forest",
+      "top1_mean": 0.3518,
+      "top1_std": 0.0108,
+      "top3_mean": 0.668,
+      "top3_std": 0.0095,
+      "top5_mean": 0.8516,
+      "top5_std": 0.0087,
+      "macro_f1_mean": 0.3553,
+      "macro_f1_std": 0.016,
+      "weighted_f1_mean": 0.3388,
+      "weighted_f1_std": 0.0125
+    },
+    {
+      "model": "XGBoost",
+      "top1_mean": 0.3288,
+      "top1_std": 0.0059,
+      "top3_mean": 0.6588,
+      "top3_std": 0.0043,
+      "top5_mean": 0.85,
+      "top5_std": 0.0045,
+      "macro_f1_mean": 0.3451,
+      "macro_f1_std": 0.0061,
+      "weighted_f1_mean": 0.3246,
+      "weighted_f1_std": 0.0058
+    }
+  ],
+  "best_model": "Logistic Regression",
+  "n_cases": 5000,
+  "n_features": 17,
+  "areas": [
+    "Area_A",
+    "Area_B",
+    "Area_C",
+    "Area_D",
+    "Area_E",
+    "Area_F",
+    "Area_G",
+    "Area_H",
+    "Area_I",
+    "Area_J"
+  ]
+}
