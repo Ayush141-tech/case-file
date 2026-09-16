@@ -1,0 +1,233 @@
+Area_ID,Area_Name,Latitude,Longitude,POI_ID,POI_Type,POI_Name,Road_Name,Nearby_Road,Distance_From_City_Center,Area_Type
+AR01,Area_A,23.316513,77.335376,POI-AR01-001,Hospital,River Hospital 1,River Lane 4,River Road 6,10.62,Residential
+AR01,Area_A,23.307243,77.328667,POI-AR01-002,School,Union School 2,River Avenue 20,River Lane 4,10.47,Residential
+AR01,Area_A,23.326905,77.335727,POI-AR01-003,Hospital,New Hospital 3,Silver Lane 19,Golden Lane 25,11.43,Residential
+AR01,Area_A,23.316907,77.344568,POI-AR01-004,Residential Area,New Residential Area 4,River Road 6,Silver Lane 19,10.0,Residential
+AR01,Area_A,23.308042,77.34487,POI-AR01-005,Intersection,North Intersection 5,Golden Lane 25,River Avenue 20,9.27,Residential
+AR01,Area_A,23.324807,77.344465,POI-AR01-006,Park,Lake Park 6,Silver Lane 19,River Avenue 20,10.68,Residential
+AR01,Area_A,23.319203,77.323127,POI-AR01-007,Hospital,Old Hospital 7,River Lane 4,River Avenue 20,11.75,Residential
+AR01,Area_A,23.310028,77.343998,POI-AR01-008,Intersection,Lake Intersection 8,Palm Lane 4,Central Road 18,9.49,Residential
+AR01,Area_A,23.316437,77.347375,POI-AR01-009,Metro Station,Central Metro Station 9,Golden Lane 25,Central Road 18,9.77,Residential
+AR01,Area_A,23.3105,77.33661,POI-AR01-010,Bus Stop,East Bus Stop 10,Silver Lane 19,Golden Lane 25,10.07,Residential
+AR01,Area_A,23.322377,77.334059,POI-AR01-011,Hospital,West Hospital 11,Silver Lane 19,River Lane 4,11.18,Residential
+AR01,Area_A,23.314705,77.342327,POI-AR01-012,Residential Area,New Residential Area 12,Palm Lane 4,River Avenue 20,9.98,Residential
+AR01,Area_A,23.309765,77.341793,POI-AR01-013,Residential Area,River Residential Area 13,Golden Lane 25,River Avenue 20,9.63,Residential
+AR01,Area_A,23.328351,77.343569,POI-AR01-014,Park,Silver Park 14,River Avenue 20,Central Road 18,11.04,Residential
+AR01,Area_A,23.310734,77.336102,POI-AR01-015,Bus Stop,River Bus Stop 15,Silver Lane 19,Central Road 18,10.13,Residential
+AR01,Area_A,23.317778,77.325292,POI-AR01-016,Residential Area,Green Residential Area 16,Silver Lane 19,Central Road 18,11.47,Residential
+AR01,Area_A,23.339967,77.369139,POI-AR01-017,Intersection,Union Intersection 17,Silver Lane 19,River Lane 4,10.84,Residential
+AR01,Area_A,23.29868,77.342677,POI-AR01-018,Park,Garden Park 18,Central Road 18,Palm Lane 4,8.75,Residential
+AR01,Area_A,23.318592,77.35066,POI-AR01-019,School,Hill School 19,River Avenue 20,River Lane 4,9.74,Residential
+AR02,Area_B,23.329827,77.405007,POI-AR02-001,Office Area,Garden Office Area 1,New Lane 13,South Lane 27,8.89,Commercial
+AR02,Area_B,23.341285,77.401786,POI-AR02-002,Shopping Area,North Shopping Area 2,South Lane 27,Sunrise Highway 29,10.19,Commercial
+AR02,Area_B,23.329316,77.41385,POI-AR02-003,Market,Sunrise Market 3,East Street 10,Sunrise Highway 29,8.83,Commercial
+AR02,Area_B,23.324461,77.40545,POI-AR02-004,Restaurant,Central Restaurant 4,South Lane 27,East Street 10,8.29,Commercial
+AR02,Area_B,23.321726,77.425791,POI-AR02-005,Public Place,Palm Public Place 5,Sunrise Highway 29,New Lane 13,8.14,Commercial
+AR02,Area_B,23.33306,77.412194,POI-AR02-006,Shopping Area,Star Shopping Area 6,South Lane 27,East Street 10,9.24,Commercial
+AR02,Area_B,23.324288,77.425358,POI-AR02-007,School,Old School 7,South Lane 27,New Lane 13,8.41,Commercial
+AR02,Area_B,23.336509,77.427237,POI-AR02-008,Market,Star Market 8,Sunrise Highway 29,New Lane 13,9.78,Commercial
+AR02,Area_B,23.334614,77.39893,POI-AR02-009,Bus Stop,New Bus Stop 9,South Lane 27,Sunrise Highway 29,9.48,Commercial
+AR02,Area_B,23.319949,77.408366,POI-AR02-010,Metro Station,Golden Metro Station 10,Sunrise Highway 29,New Lane 13,7.78,Commercial
+AR02,Area_B,23.320906,77.416439,POI-AR02-011,Market,Garden Market 11,New Lane 13,South Lane 27,7.91,Commercial
+AR02,Area_B,23.307812,77.401218,POI-AR02-012,Office Area,Hill Office Area 12,Sunrise Highway 29,East Street 10,6.49,Commercial
+AR02,Area_B,23.306736,77.410306,POI-AR02-013,Office Area,Green Office Area 13,New Lane 13,East Street 10,6.31,Commercial
+AR02,Area_B,23.316723,77.420028,POI-AR02-014,Park,Star Park 14,East Street 10,South Lane 27,7.49,Commercial
+AR02,Area_B,23.318455,77.403041,POI-AR02-015,College,Lake College 15,New Lane 13,East Street 10,7.64,Commercial
+AR02,Area_B,23.309156,77.410905,POI-AR02-016,Shopping Area,Hill Shopping Area 16,East Street 10,South Lane 27,6.58,Commercial
+AR02,Area_B,23.338768,77.401468,POI-AR02-017,Metro Station,Golden Metro Station 17,Sunrise Highway 29,South Lane 27,9.91,Commercial
+AR02,Area_B,23.323156,77.422059,POI-AR02-018,Restaurant,Lake Restaurant 18,South Lane 27,Sunrise Highway 29,8.23,Commercial
+AR02,Area_B,23.298527,77.408373,POI-AR02-019,Restaurant,Golden Restaurant 19,East Street 10,Sunrise Highway 29,5.4,Commercial
+AR02,Area_B,23.314706,77.401231,POI-AR02-020,Shopping Area,Palm Shopping Area 20,New Lane 13,East Street 10,7.25,Commercial
+AR02,Area_B,23.30533,77.431292,POI-AR02-021,Restaurant,Central Restaurant 21,New Lane 13,Sunrise Highway 29,6.53,Commercial
+AR02,Area_B,23.349051,77.398284,POI-AR02-022,Restaurant,Golden Restaurant 22,South Lane 27,East Street 10,11.08,Commercial
+AR02,Area_B,23.337287,77.400131,POI-AR02-023,Bus Stop,Star Bus Stop 23,New Lane 13,Sunrise Highway 29,9.76,Commercial
+AR03,Area_C,23.323518,77.480532,POI-AR03-001,School,Silver School 1,West Highway 3,Green Lane 21,10.9,Educational
+AR03,Area_C,23.323165,77.479027,POI-AR03-002,College,Central College 2,River Road 18,West Highway 3,10.77,Educational
+AR03,Area_C,23.312369,77.468876,POI-AR03-003,School,River School 3,East Road 12,Green Lane 21,9.18,Educational
+AR03,Area_C,23.324801,77.462554,POI-AR03-004,Road,Palm Road 4,Green Lane 21,West Highway 3,9.9,Educational
+AR03,Area_C,23.315285,77.482637,POI-AR03-005,Public Place,Star Public Place 5,Silver Road 8,West Highway 3,10.38,Educational
+AR03,Area_C,23.318965,77.47748,POI-AR03-006,Restaurant,New Restaurant 6,Silver Road 8,Green Lane 21,10.31,Educational
+AR03,Area_C,23.317631,77.481765,POI-AR03-007,School,Palm School 7,River Road 18,East Lane 1,10.5,Educational
+AR03,Area_C,23.302433,77.48328,POI-AR03-008,Intersection,River Intersection 8,River Road 18,East Lane 1,9.49,Educational
+AR03,Area_C,23.316715,77.479387,POI-AR03-009,School,Old School 9,River Road 18,West Highway 3,10.26,Educational
+AR03,Area_C,23.333,77.485827,POI-AR03-010,Market,Palm Market 10,East Lane 1,West Highway 3,12.05,Educational
+AR03,Area_C,23.337439,77.48439,POI-AR03-011,Residential Area,New Residential Area 11,River Road 18,Green Lane 21,12.34,Educational
+AR03,Area_C,23.320665,77.473026,POI-AR03-012,Residential Area,West Residential Area 12,West Highway 3,East Road 12,10.16,Educational
+AR03,Area_C,23.318093,77.491712,POI-AR03-013,Office Area,West Office Area 13,Silver Road 8,East Road 12,11.27,Educational
+AR03,Area_C,23.327308,77.46428,POI-AR03-014,Office Area,Golden Office Area 14,East Road 12,Green Lane 21,10.23,Educational
+AR03,Area_C,23.335112,77.486375,POI-AR03-015,Restaurant,Garden Restaurant 15,Green Lane 21,Silver Road 8,12.26,Educational
+AR03,Area_C,23.320328,77.467834,POI-AR03-016,Public Place,North Public Place 16,East Road 12,Silver Road 8,9.8,Educational
+AR03,Area_C,23.331553,77.486088,POI-AR03-017,Railway Station,Sunrise Railway Station 17,East Lane 1,Silver Road 8,11.94,Educational
+AR03,Area_C,23.32072,77.484139,POI-AR03-018,Park,Hill Park 18,East Lane 1,River Road 18,10.92,Educational
+AR03,Area_C,23.325909,77.464184,POI-AR03-019,Public Place,River Public Place 19,West Highway 3,East Road 12,10.09,Educational
+AR03,Area_C,23.328466,77.474291,POI-AR03-020,Shopping Area,West Shopping Area 20,West Highway 3,Silver Road 8,10.92,Educational
+AR03,Area_C,23.322344,77.482703,POI-AR03-021,Metro Station,Old Metro Station 21,West Highway 3,River Road 18,10.95,Educational
+AR03,Area_C,23.318475,77.483834,POI-AR03-022,Market,South Market 22,Green Lane 21,East Lane 1,10.72,Educational
+AR03,Area_C,23.334815,77.472564,POI-AR03-023,School,Green School 23,Green Lane 21,West Highway 3,11.39,Educational
+AR03,Area_C,23.328444,77.480114,POI-AR03-024,Restaurant,Sunrise Restaurant 24,Green Lane 21,East Road 12,11.29,Educational
+AR03,Area_C,23.325541,77.503277,POI-AR03-025,Public Place,Silver Public Place 25,Green Lane 21,Silver Road 8,12.7,Educational
+AR03,Area_C,23.336043,77.475423,POI-AR03-026,Intersection,Hill Intersection 26,East Road 12,River Road 18,11.67,Educational
+AR03,Area_C,23.307484,77.463987,POI-AR03-027,College,Lake College 27,River Road 18,Silver Road 8,8.44,Educational
+AR03,Area_C,23.325242,77.482763,POI-AR03-028,Market,Hill Market 28,East Road 12,East Lane 1,11.19,Educational
+AR03,Area_C,23.315282,77.484594,POI-AR03-029,College,Garden College 29,East Road 12,River Road 18,10.52,Educational
+AR04,Area_D,23.248825,77.348295,POI-AR04-001,Road,Sunrise Road 1,Golden Highway 8,North Street 10,6.31,Transportation
+AR04,Area_D,23.235178,77.316664,POI-AR04-002,Shopping Area,Central Shopping Area 2,North Lane 6,Golden Highway 8,9.68,Transportation
+AR04,Area_D,23.251978,77.350892,POI-AR04-003,College,Union College 3,Golden Highway 8,North Boulevard 12,6.04,Transportation
+AR04,Area_D,23.242305,77.353536,POI-AR04-004,Road,Hill Road 4,Lake Road 34,North Lane 6,5.83,Transportation
+AR04,Area_D,23.235195,77.331119,POI-AR04-005,Road,Palm Road 5,North Lane 6,Silver Boulevard 34,8.23,Transportation
+AR04,Area_D,23.267208,77.326178,POI-AR04-006,Residential Area,Hill Residential Area 6,North Lane 6,Sunrise Lane 4,8.77,Transportation
+AR04,Area_D,23.248689,77.321691,POI-AR04-007,Road,Sunrise Road 7,Silver Boulevard 34,Sunrise Lane 4,9.02,Transportation
+AR04,Area_D,23.244661,77.329302,POI-AR04-008,Road,River Road 8,North Street 10,Lake Road 34,8.27,Transportation
+AR04,Area_D,23.253287,77.343619,POI-AR04-009,School,Union School 9,Sunrise Lane 4,North Boulevard 12,6.79,Transportation
+AR04,Area_D,23.235231,77.350672,POI-AR04-010,Intersection,Central Intersection 10,Lake Road 34,Silver Boulevard 34,6.28,Transportation
+AR04,Area_D,23.248689,77.343488,POI-AR04-011,Road,Star Road 11,North Boulevard 12,Silver Boulevard 34,6.8,Transportation
+AR04,Area_D,23.250694,77.341602,POI-AR04-012,Road,South Road 12,Silver Boulevard 34,Lake Road 34,6.99,Transportation
+AR04,Area_D,23.249741,77.343139,POI-AR04-013,Market,Green Market 13,Sunrise Lane 4,North Street 10,6.83,Transportation
+AR04,Area_D,23.22927,77.328826,POI-AR04-014,Intersection,Star Intersection 14,North Lane 6,Silver Boulevard 34,8.61,Transportation
+AR04,Area_D,23.26106,77.330379,POI-AR04-015,Bus Stop,Green Bus Stop 15,Silver Boulevard 34,Lake Road 34,8.23,Transportation
+AR04,Area_D,23.247156,77.341853,POI-AR04-016,Park,Sunrise Park 16,Silver Boulevard 34,Sunrise Lane 4,6.97,Transportation
+AR04,Area_D,23.238581,77.340063,POI-AR04-017,Bus Stop,Union Bus Stop 17,North Street 10,Silver Boulevard 34,7.26,Transportation
+AR04,Area_D,23.264332,77.340915,POI-AR04-018,Bus Stop,East Bus Stop 18,North Boulevard 12,Golden Highway 8,7.24,Transportation
+AR04,Area_D,23.242205,77.344303,POI-AR04-019,Bus Stop,Hill Bus Stop 19,North Street 10,North Boulevard 12,6.77,Transportation
+AR04,Area_D,23.256125,77.346656,POI-AR04-020,Bus Stop,Palm Bus Stop 20,Golden Highway 8,Lake Road 34,6.51,Transportation
+AR04,Area_D,23.25454,77.336913,POI-AR04-021,Intersection,South Intersection 21,Golden Highway 8,Sunrise Lane 4,7.48,Transportation
+AR04,Area_D,23.246644,77.320092,POI-AR04-022,Residential Area,Silver Residential Area 22,Golden Highway 8,Silver Boulevard 34,9.19,Transportation
+AR04,Area_D,23.242805,77.324975,POI-AR04-023,Road,Old Road 23,North Street 10,Silver Boulevard 34,8.72,Transportation
+AR04,Area_D,23.274204,77.344349,POI-AR04-024,Metro Station,Green Metro Station 24,Silver Boulevard 34,Golden Highway 8,7.23,Transportation
+AR04,Area_D,23.247027,77.340995,POI-AR04-025,Residential Area,Silver Residential Area 25,Silver Boulevard 34,North Lane 6,7.06,Transportation
+AR05,Area_E,23.263358,77.408087,POI-AR05-001,Restaurant,Hill Restaurant 1,East Highway 7,Garden Boulevard 22,1.5,Mixed
+AR05,Area_E,23.251315,77.412582,POI-AR05-002,Road,Green Road 2,East Highway 7,Green Boulevard 36,0.3,Mixed
+AR05,Area_E,23.240589,77.405514,POI-AR05-003,Intersection,Star Intersection 3,Golden Lane 19,Green Boulevard 36,1.14,Mixed
+AR05,Area_E,23.244612,77.421478,POI-AR05-004,Bus Stop,Central Bus Stop 4,Green Boulevard 36,East Highway 7,1.32,Mixed
+AR05,Area_E,23.233135,77.401738,POI-AR05-005,Road,Palm Road 5,Green Boulevard 36,East Highway 7,2.06,Mixed
+AR05,Area_E,23.248408,77.412034,POI-AR05-006,Shopping Area,Sunrise Shopping Area 6,Green Boulevard 36,East Highway 7,0.27,Mixed
+AR05,Area_E,23.256627,77.41385,POI-AR05-007,Park,New Park 7,East Highway 7,Green Boulevard 36,0.84,Mixed
+AR05,Area_E,23.249129,77.406929,POI-AR05-008,Restaurant,Golden Restaurant 8,East Highway 7,Green Boulevard 36,0.33,Mixed
+AR05,Area_E,23.237555,77.401112,POI-AR05-009,Restaurant,North Restaurant 9,East Highway 7,Garden Boulevard 22,1.66,Mixed
+AR05,Area_E,23.242345,77.419002,POI-AR05-010,Residential Area,Star Residential Area 10,East Highway 7,Golden Lane 19,1.25,Mixed
+AR05,Area_E,23.243471,77.415484,POI-AR05-011,Road,Green Road 11,East Highway 7,Golden Lane 19,0.92,Mixed
+AR05,Area_E,23.25262,77.401003,POI-AR05-012,Road,River Road 12,Green Boulevard 36,East Highway 7,0.96,Mixed
+AR05,Area_E,23.263362,77.422479,POI-AR05-013,Public Place,Garden Public Place 13,Garden Boulevard 22,East Highway 7,1.96,Mixed
+AR05,Area_E,23.238437,77.407062,POI-AR05-014,Shopping Area,Star Shopping Area 14,East Highway 7,Garden Boulevard 22,1.32,Mixed
+AR05,Area_E,23.269973,77.398234,POI-AR05-015,Road,Sunrise Road 15,Green Boulevard 36,Garden Boulevard 22,2.53,Mixed
+AR05,Area_E,23.237776,77.41249,POI-AR05-016,Public Place,Sunrise Public Place 16,Garden Boulevard 22,Green Boulevard 36,1.38,Mixed
+AR05,Area_E,23.245761,77.393482,POI-AR05-017,Shopping Area,New Shopping Area 17,Golden Lane 19,Green Boulevard 36,1.75,Mixed
+AR05,Area_E,23.258126,77.412417,POI-AR05-018,Park,Golden Park 18,East Highway 7,Garden Boulevard 22,0.94,Mixed
+AR05,Area_E,23.244225,77.422744,POI-AR05-019,Market,West Market 19,Green Boulevard 36,East Highway 7,1.45,Mixed
+AR05,Area_E,23.257629,77.414481,POI-AR05-020,College,Union College 20,Golden Lane 19,Green Boulevard 36,0.96,Mixed
+AR05,Area_E,23.239657,77.412353,POI-AR05-021,Road,Golden Road 21,Green Boulevard 36,East Highway 7,1.17,Mixed
+AR05,Area_E,23.237174,77.417138,POI-AR05-022,Restaurant,Golden Restaurant 22,East Highway 7,Golden Lane 19,1.6,Mixed
+AR05,Area_E,23.264512,77.405593,POI-AR05-023,Bus Stop,Green Bus Stop 23,Golden Lane 19,Garden Boulevard 22,1.68,Mixed
+AR05,Area_E,23.254711,77.404665,POI-AR05-024,Shopping Area,Hill Shopping Area 24,Green Boulevard 36,Garden Boulevard 22,0.76,Mixed
+AR05,Area_E,23.239594,77.385872,POI-AR05-025,Shopping Area,Hill Shopping Area 25,East Highway 7,Garden Boulevard 22,2.72,Mixed
+AR06,Area_F,23.246627,77.47858,POI-AR06-001,Hospital,East Hospital 1,South Highway 14,Lake Avenue 5,7.02,Healthcare
+AR06,Area_F,23.232693,77.481644,POI-AR06-002,Shopping Area,Garden Shopping Area 2,Palm Street 27,Union Lane 39,7.57,Healthcare
+AR06,Area_F,23.248258,77.496679,POI-AR06-003,Park,South Park 3,New Highway 24,Palm Street 27,8.86,Healthcare
+AR06,Area_F,23.24131,77.481774,POI-AR06-004,Road,West Road 4,Union Lane 39,Central Lane 35,7.4,Healthcare
+AR06,Area_F,23.23308,77.479824,POI-AR06-005,Market,Hill Market 5,Palm Street 27,Union Lane 39,7.38,Healthcare
+AR06,Area_F,23.232943,77.463843,POI-AR06-006,Public Place,New Public Place 6,Union Lane 39,Lake Highway 17,5.82,Healthcare
+AR06,Area_F,23.224353,77.487848,POI-AR06-007,Park,Sunrise Park 7,South Highway 14,New Highway 24,8.45,Healthcare
+AR06,Area_F,23.258358,77.483494,POI-AR06-008,Bus Stop,New Bus Stop 8,Central Lane 35,Union Lane 39,7.57,Healthcare
+AR06,Area_F,23.254202,77.483877,POI-AR06-009,Hospital,River Hospital 9,Lake Highway 17,Palm Street 27,7.56,Healthcare
+AR06,Area_F,23.262517,77.474787,POI-AR06-010,School,Green School 10,Lake Avenue 5,Lake Highway 17,6.76,Healthcare
+AR06,Area_F,23.245646,77.475209,POI-AR06-011,Public Place,West Public Place 11,Palm Street 27,Lake Avenue 5,6.68,Healthcare
+AR06,Area_F,23.245752,77.483141,POI-AR06-012,Shopping Area,South Shopping Area 12,Union Lane 39,Central Lane 35,7.49,Healthcare
+AR06,Area_F,23.227482,77.471733,POI-AR06-013,Road,New Road 13,New Highway 24,Lake Avenue 5,6.79,Healthcare
+AR06,Area_F,23.240848,77.477989,POI-AR06-014,Road,Central Road 14,Lake Highway 17,Lake Avenue 5,7.02,Healthcare
+AR06,Area_F,23.239692,77.47943,POI-AR06-015,Road,Golden Road 15,New Highway 24,Union Lane 39,7.19,Healthcare
+AR06,Area_F,23.255585,77.477785,POI-AR06-016,Bus Stop,Silver Bus Stop 16,Lake Avenue 5,Palm Street 27,6.95,Healthcare
+AR06,Area_F,23.257017,77.469649,POI-AR06-017,Road,East Road 17,New Highway 24,Lake Avenue 5,6.14,Healthcare
+AR06,Area_F,23.234365,77.486857,POI-AR06-018,Park,Hill Park 18,Palm Street 27,Lake Highway 17,8.04,Healthcare
+AR06,Area_F,23.249038,77.49128,POI-AR06-019,Restaurant,River Restaurant 19,Lake Avenue 5,Union Lane 39,8.3,Healthcare
+AR06,Area_F,23.264612,77.482826,POI-AR06-020,Shopping Area,Lake Shopping Area 20,Lake Avenue 5,Union Lane 39,7.62,Healthcare
+AR06,Area_F,23.238805,77.484478,POI-AR06-021,Road,West Road 21,Lake Avenue 5,South Highway 14,7.71,Healthcare
+AR06,Area_F,23.252781,77.481581,POI-AR06-022,Intersection,North Intersection 22,Union Lane 39,Lake Avenue 5,7.32,Healthcare
+AR06,Area_F,23.233801,77.457527,POI-AR06-023,Road,Lake Road 23,Lake Avenue 5,New Highway 24,5.18,Healthcare
+AR06,Area_F,23.231402,77.48099,POI-AR06-024,Residential Area,River Residential Area 24,Lake Avenue 5,Union Lane 39,7.54,Healthcare
+AR06,Area_F,23.255163,77.476283,POI-AR06-025,Residential Area,Garden Residential Area 25,Lake Highway 17,Lake Avenue 5,6.8,Healthcare
+AR06,Area_F,23.239849,77.500488,POI-AR06-026,Public Place,Central Public Place 26,Union Lane 39,Lake Highway 17,9.31,Healthcare
+AR06,Area_F,23.240791,77.48855,POI-AR06-027,Hospital,Hill Hospital 27,Lake Highway 17,New Highway 24,8.09,Healthcare
+AR06,Area_F,23.256354,77.4874,POI-AR06-028,Bus Stop,River Bus Stop 28,Lake Highway 17,New Highway 24,7.94,Healthcare
+AR07,Area_G,23.182552,77.353506,POI-AR07-001,School,Central School 1,Golden Avenue 15,Silver Street 29,9.46,Recreational
+AR07,Area_G,23.18397,77.340604,POI-AR07-002,Restaurant,East Restaurant 2,Golden Avenue 15,Silver Street 29,10.21,Recreational
+AR07,Area_G,23.179203,77.357976,POI-AR07-003,Road,River Road 3,Sunrise Highway 33,North Highway 7,9.5,Recreational
+AR07,Area_G,23.180442,77.337971,POI-AR07-004,College,East College 4,Golden Avenue 15,Sunrise Highway 33,10.68,Recreational
+AR07,Area_G,23.172539,77.327497,POI-AR07-005,Market,East Market 5,North Highway 7,Sunrise Highway 33,12.05,Recreational
+AR07,Area_G,23.178773,77.349957,POI-AR07-006,Restaurant,Sunrise Restaurant 6,Golden Avenue 15,North Highway 7,10.02,Recreational
+AR07,Area_G,23.180389,77.33155,POI-AR07-007,Restaurant,West Restaurant 7,Sunrise Highway 33,North Highway 7,11.14,Recreational
+AR07,Area_G,23.192873,77.351,POI-AR07-008,Office Area,Green Office Area 8,North Highway 7,Silver Street 29,8.76,Recreational
+AR07,Area_G,23.176809,77.342172,POI-AR07-009,Public Place,Star Public Place 9,Golden Avenue 15,North Highway 7,10.69,Recreational
+AR07,Area_G,23.17496,77.333719,POI-AR07-010,Residential Area,Union Residential Area 10,Silver Street 29,Sunrise Highway 33,11.42,Recreational
+AR07,Area_G,23.182441,77.342732,POI-AR07-011,Park,Old Park 11,Silver Street 29,Golden Avenue 15,10.18,Recreational
+AR07,Area_G,23.168379,77.318833,POI-AR07-012,Bus Stop,West Bus Stop 12,Silver Street 29,Sunrise Highway 33,13.01,Recreational
+AR07,Area_G,23.180309,77.338824,POI-AR07-013,Restaurant,South Restaurant 13,Sunrise Highway 33,North Highway 7,10.63,Recreational
+AR07,Area_G,23.195614,77.328722,POI-AR07-014,Restaurant,Golden Restaurant 14,Silver Street 29,Sunrise Highway 33,10.27,Recreational
+AR07,Area_G,23.171057,77.336737,POI-AR07-015,Restaurant,North Restaurant 15,Golden Avenue 15,Sunrise Highway 33,11.54,Recreational
+AR07,Area_G,23.199051,77.340356,POI-AR07-016,Road,Golden Road 16,Silver Street 29,Sunrise Highway 33,9.1,Recreational
+AR07,Area_G,23.181311,77.343655,POI-AR07-017,College,Old College 17,Sunrise Highway 33,North Highway 7,10.21,Recreational
+AR07,Area_G,23.18969,77.336382,POI-AR07-018,Park,River Park 18,Sunrise Highway 33,North Highway 7,10.08,Recreational
+AR07,Area_G,23.180311,77.342786,POI-AR07-019,Bus Stop,Golden Bus Stop 19,Golden Avenue 15,North Highway 7,10.36,Recreational
+AR07,Area_G,23.16063,77.346666,POI-AR07-020,Office Area,East Office Area 20,Sunrise Highway 33,Golden Avenue 15,11.86,Recreational
+AR07,Area_G,23.179416,77.34084,POI-AR07-021,Intersection,Old Intersection 21,North Highway 7,Sunrise Highway 33,10.56,Recreational
+AR07,Area_G,23.175931,77.334151,POI-AR07-022,Bus Stop,West Bus Stop 22,North Highway 7,Golden Avenue 15,11.31,Recreational
+AR07,Area_G,23.169921,77.347243,POI-AR07-023,Road,Central Road 23,Sunrise Highway 33,Silver Street 29,10.97,Recreational
+AR07,Area_G,23.179877,77.33779,POI-AR07-024,Intersection,Lake Intersection 24,North Highway 7,Silver Street 29,10.74,Recreational
+AR07,Area_G,23.182256,77.349476,POI-AR07-025,Restaurant,Sunrise Restaurant 25,Silver Street 29,North Highway 7,9.75,Recreational
+AR07,Area_G,23.182889,77.352449,POI-AR07-026,Road,Garden Road 26,Golden Avenue 15,Sunrise Highway 33,9.5,Recreational
+AR07,Area_G,23.16296,77.33167,POI-AR07-027,Intersection,Green Intersection 27,Sunrise Highway 33,North Highway 7,12.56,Recreational
+AR07,Area_G,23.176883,77.350493,POI-AR07-028,Market,East Market 28,North Highway 7,Sunrise Highway 33,10.15,Recreational
+AR08,Area_H,23.180699,77.399238,POI-AR08-001,Road,Sunrise Road 1,Old Boulevard 16,River Boulevard 16,7.78,Industrial
+AR08,Area_H,23.173778,77.419874,POI-AR08-002,Market,Green Market 2,Golden Street 34,East Street 35,8.54,Industrial
+AR08,Area_H,23.170371,77.415294,POI-AR08-003,Restaurant,Silver Restaurant 3,Old Boulevard 16,South Highway 2,8.87,Industrial
+AR08,Area_H,23.17133,77.411192,POI-AR08-004,Road,Central Road 4,Golden Street 34,River Boulevard 16,8.75,Industrial
+AR08,Area_H,23.198822,77.408303,POI-AR08-005,School,Green School 5,Golden Road 9,East Street 35,5.69,Industrial
+AR08,Area_H,23.18006,77.414483,POI-AR08-006,Road,Green Road 6,Golden Street 34,Golden Road 9,7.79,Industrial
+AR08,Area_H,23.183096,77.415895,POI-AR08-007,College,Garden College 7,Old Boulevard 16,Golden Street 34,7.46,Industrial
+AR08,Area_H,23.18866,77.412116,POI-AR08-008,Road,Central Road 8,Golden Street 34,South Highway 2,6.82,Industrial
+AR08,Area_H,23.192003,77.412894,POI-AR08-009,Residential Area,Hill Residential Area 9,Golden Road 9,River Boulevard 16,6.46,Industrial
+AR08,Area_H,23.183829,77.373516,POI-AR08-010,Public Place,West Public Place 10,South Highway 2,Golden Road 9,8.25,Industrial
+AR08,Area_H,23.184775,77.398376,POI-AR08-011,Road,River Road 11,Golden Street 34,East Street 35,7.35,Industrial
+AR08,Area_H,23.202429,77.409981,POI-AR08-012,Office Area,Old Office Area 12,Golden Road 9,River Boulevard 16,5.29,Industrial
+AR08,Area_H,23.18131,77.399977,POI-AR08-013,Road,New Road 13,Golden Road 9,River Boulevard 16,7.71,Industrial
+AR08,Area_H,23.177442,77.402578,POI-AR08-014,Public Place,North Public Place 14,South Highway 2,Golden Road 9,8.1,Industrial
+AR08,Area_H,23.177172,77.408938,POI-AR08-015,Road,Lake Road 15,South Highway 2,Golden Street 34,8.1,Industrial
+AR08,Area_H,23.169584,77.421047,POI-AR08-016,Railway Station,Star Railway Station 16,Old Boulevard 16,River Boulevard 16,9.01,Industrial
+AR08,Area_H,23.184438,77.414634,POI-AR08-017,Residential Area,Hill Residential Area 17,South Highway 2,Golden Road 9,7.31,Industrial
+AR08,Area_H,23.183744,77.41632,POI-AR08-018,Shopping Area,West Shopping Area 18,East Street 35,South Highway 2,7.4,Industrial
+AR08,Area_H,23.176974,77.405172,POI-AR08-019,Restaurant,West Restaurant 19,Old Boulevard 16,South Highway 2,8.14,Industrial
+AR08,Area_H,23.193148,77.408903,POI-AR08-020,Bus Stop,Garden Bus Stop 20,East Street 35,South Highway 2,6.32,Industrial
+AR08,Area_H,23.181212,77.411308,POI-AR08-021,Office Area,New Office Area 21,South Highway 2,Golden Street 34,7.65,Industrial
+AR08,Area_H,23.175855,77.416339,POI-AR08-022,Bus Stop,Sunrise Bus Stop 22,Old Boulevard 16,Golden Street 34,8.27,Industrial
+AR08,Area_H,23.186701,77.406252,POI-AR08-023,Road,Golden Road 23,Golden Road 9,Old Boulevard 16,7.05,Industrial
+AR09,Area_I,23.184098,77.486161,POI-AR09-001,Restaurant,Hill Restaurant 1,East Boulevard 11,Golden Road 11,10.69,Residential
+AR09,Area_I,23.180361,77.479954,POI-AR09-002,Residential Area,Garden Residential Area 2,New Highway 8,Palm Highway 10,10.54,Residential
+AR09,Area_I,23.182028,77.474996,POI-AR09-003,Metro Station,Hill Metro Station 3,New Highway 8,East Boulevard 11,10.06,Residential
+AR09,Area_I,23.189861,77.474422,POI-AR09-004,Office Area,Green Office Area 4,East Highway 37,New Street 27,9.38,Residential
+AR09,Area_I,23.170452,77.489739,POI-AR09-005,Office Area,Silver Office Area 5,Star Highway 7,Palm Highway 10,12.03,Residential
+AR09,Area_I,23.171408,77.474623,POI-AR09-006,Market,Sunrise Market 6,New Street 27,Golden Road 11,10.95,Residential
+AR09,Area_I,23.184375,77.467582,POI-AR09-007,Shopping Area,Garden Shopping Area 7,Golden Road 11,East Highway 37,9.37,Residential
+AR09,Area_I,23.166227,77.49472,POI-AR09-008,Park,Golden Park 8,East Boulevard 11,Star Highway 7,12.72,Residential
+AR09,Area_I,23.181183,77.484447,POI-AR09-009,Bus Stop,Old Bus Stop 9,Palm Highway 10,East Highway 37,10.79,Residential
+AR09,Area_I,23.191322,77.473556,POI-AR09-010,Shopping Area,West Shopping Area 10,Palm Highway 10,New Highway 8,9.21,Residential
+AR09,Area_I,23.18455,77.494451,POI-AR09-011,Market,Central Market 11,New Highway 8,Golden Road 11,11.29,Residential
+AR09,Area_I,23.177707,77.464072,POI-AR09-012,Intersection,Golden Intersection 12,Palm Highway 10,East Highway 37,9.75,Residential
+AR09,Area_I,23.19319,77.508092,POI-AR09-013,Bus Stop,Palm Bus Stop 13,New Street 27,East Highway 37,11.85,Residential
+AR09,Area_I,23.178488,77.484326,POI-AR09-014,Road,Garden Road 14,East Highway 37,Palm Highway 10,11.0,Residential
+AR09,Area_I,23.175917,77.466019,POI-AR09-015,Office Area,Silver Office Area 15,Golden Road 11,Star Highway 7,10.03,Residential
+AR10,Area_J,23.085792,77.614946,POI-AR10-001,Park,Garden Park 1,Green Lane 22,North Boulevard 1,27.79,Mixed
+AR10,Area_J,23.081301,77.616141,POI-AR10-002,Hospital,West Hospital 2,Green Lane 22,Silver Highway 26,28.21,Mixed
+AR10,Area_J,23.077007,77.596442,POI-AR10-003,Market,Silver Market 3,North Boulevard 1,Silver Highway 26,27.08,Mixed
+AR10,Area_J,23.078402,77.624874,POI-AR10-004,Market,Silver Market 4,North Boulevard 1,Green Lane 22,29.1,Mixed
+AR10,Area_J,23.07102,77.61079,POI-AR10-005,Restaurant,Lake Restaurant 5,North Boulevard 1,Green Lane 22,28.59,Mixed
+AR10,Area_J,23.07352,77.600114,POI-AR10-006,Intersection,Hill Intersection 6,Green Lane 22,Central Lane 12,27.62,Mixed
+AR10,Area_J,23.067642,77.608158,POI-AR10-007,School,North School 7,Central Lane 12,Silver Highway 26,28.66,Mixed
+AR10,Area_J,23.069016,77.607561,POI-AR10-008,Restaurant,South Restaurant 8,North Boulevard 1,Green Lane 22,28.51,Mixed
+AR10,Area_J,23.063141,77.623817,POI-AR10-009,Park,Union Park 9,Central Lane 12,Silver Highway 26,30.16,Mixed
+AR10,Area_J,23.070617,77.610372,POI-AR10-010,Shopping Area,West Shopping Area 10,Silver Highway 26,Central Lane 12,28.59,Mixed
+AR10,Area_J,23.046804,77.589985,POI-AR10-011,School,Golden School 11,Silver Highway 26,Green Lane 22,29.14,Mixed
+AR10,Area_J,23.076901,77.614731,POI-AR10-012,Office Area,Old Office Area 12,Green Lane 22,Central Lane 12,28.43,Mixed
+AR10,Area_J,23.071841,77.619627,POI-AR10-013,Restaurant,West Restaurant 13,North Boulevard 1,Green Lane 22,29.18,Mixed
+AR10,Area_J,23.076978,77.611106,POI-AR10-014,Residential Area,West Residential Area 14,North Boulevard 1,Silver Highway 26,28.16,Mixed
+AR10,Area_J,23.055823,77.598129,POI-AR10-015,Restaurant,Garden Restaurant 15,Central Lane 12,Silver Highway 26,28.92,Mixed
+AR10,Area_J,23.054927,77.600148,POI-AR10-016,Bus Stop,Golden Bus Stop 16,Silver Highway 26,Central Lane 12,29.13,Mixed
+AR10,Area_J,23.065883,77.606364,POI-AR10-017,Shopping Area,Union Shopping Area 17,North Boulevard 1,Central Lane 12,28.67,Mixed
