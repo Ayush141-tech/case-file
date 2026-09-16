@@ -1,10 +1,10 @@
 """
 CASEFILE — Streamlit UI for Missing Person Location Prediction
 ==============================================================
-A redesigned Streamlit port of the Flask web UI (templates/index.html
-+ app.py). Provides a performance dashboard (5x repeated evaluation
-summary) and an interactive Top-5 probable-location predictor with
-color-coded rank cards, probability charts, and ethical framing.
+A fully native Streamlit app (no HTML/CSS injection) mirroring the
+Flask web UI (templates/index.html + app.py). Provides a performance
+dashboard (5x repeated evaluation summary) and an interactive Top-5
+probable-location predictor.
 
 Run locally:
     streamlit run streamlit_app.py
@@ -106,14 +106,23 @@ def predict_top5(model, label_encoder, row):
     return predictions
 
 
+def predictions_to_frame(predictions):
+    """Convert prediction dicts into a tidy DataFrame for display/export."""
+    return pd.DataFrame([
+        {"Rank": p["rank"], "Area": p["area"],
+         "Probability (%)": p["probability"], "Priority": p["priority"]}
+        for p in predictions
+    ])
+
+
 def predict_all_areas(model, label_encoder, row):
     """Return a ranked DataFrame of all 10 areas with probabilities."""
     input_eng = engineer_features(pd.DataFrame([row]))
     feature_cols = get_feature_cols(input_eng)
     probs = model.predict_proba(input_eng[feature_cols])[0]
     areas = label_encoder.inverse_transform(np.arange(len(probs)))
-    df = pd.DataFrame({"Area": areas, "Probability %": np.round(probs * 100, 1)})
-    df = df.sort_values("Probability %", ascending=False).reset_index(drop=True)
+    df = pd.DataFrame({"Area": areas, "Probability (%)": np.round(probs * 100, 1)})
+    df = df.sort_values("Probability (%)", ascending=False).reset_index(drop=True)
     df.insert(0, "Rank", df.index + 1)
     return df
 
@@ -211,29 +220,8 @@ def make_prediction_figure(predictions):
     return fig
 
 
-def make_top_area_card(pred):
-    """HTML hero-card for the single most likely area."""
-    return f"""
-    <div style="display:flex; align-items:center; justify-content:space-between;
-                background:linear-gradient(135deg, #0b1220, #134e4a);
-                border-radius:14px; padding:16px 18px; color:#e2e8f0; margin-bottom:14px;">
-      <div>
-        <div style="font-size:0.72rem; font-weight:700; letter-spacing:0.12em;
-                    text-transform:uppercase; color:#67e8f9;">Highest Priority Area</div>
-        <div style="font-size:1.5rem; font-weight:800; color:#fff; margin-top:2px;">{pred['area']}</div>
-        <div style="font-size:0.82rem; color:#94a3b8;">{pred['priority']} priority · act first here</div>
-      </div>
-      <div style="text-align:right;">
-        <div style="font-family:'JetBrains Mono', monospace; font-size:1.9rem; font-weight:800;
-                    color:{pred['color']};">{pred['probability']}%</div>
-        <div style="font-size:0.78rem; color:#94a3b8;">model probability</div>
-      </div>
-    </div>
-    """
-
-
 # ---------------------------------------------------------------------------
-# Page config & global CSS
+# Page config
 # ---------------------------------------------------------------------------
 
 st.set_page_config(
@@ -243,293 +231,48 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-st.markdown(
-    """
-    <style>
-    :root {
-        --cf-cyan: #06b6d4;
-        --cf-green: #22c55e;
-        --cf-purple: #a855f7;
-        --cf-orange: #f97316;
-        --cf-red: #ef4444;
-        --cf-ink: #0f172a;
-        --cf-muted: #64748b;
-    }
-
-    /* ---------- global ---------- */
-    html, body, [class*="css"] {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        color: var(--cf-ink);
-    }
-    .stApp { background: linear-gradient(180deg, #eef2f7 0%, #f8fafc 45%); }
-    .block-container {
-        padding-top: 1.2rem; padding-bottom: 3rem;
-        max-width: 1240px; margin: 0 auto;
-    }
-
-    /* hide streamlit chrome */
-    #MainMenu, footer, header[data-testid="stHeader"] { visibility: hidden; }
-
-    /* ---------- typography ---------- */
-    h1, h2, h3 { font-weight: 800 !important; color: var(--cf-ink); }
-    div[data-testid="stWidgetLabel"] p { font-size: 0.84rem; font-weight: 600; color: #334155; }
-
-    /* ---------- widget styling ---------- */
-    div[data-baseweb="select"] > div,
-    div[data-baseweb="input"] {
-        border-radius: 10px !important;
-        border-color: #dbe2ea !important;
-        background: #ffffff;
-    }
-    div[data-baseweb="select"] > div:focus-within,
-    div[data-baseweb="input"]:focus-within,
-    div[data-baseweb="select"] > div:hover,
-    div[data-baseweb="input"]:hover {
-        border-color: #06b6d4 !important;
-    }
-    [data-testid="stBaseButton-primary"] {
-        background: linear-gradient(135deg, #155e75, #0891b2);
-        border: none; border-radius: 10px;
-        font-weight: 700; letter-spacing: 0.02em;
-        padding: 0.55rem 1.2rem;
-    }
-    [data-testid="stBaseButton-primary"]:hover {
-        background: linear-gradient(135deg, #0e7490, #06b6d4);
-        box-shadow: 0 4px 14px rgba(6, 182, 212, 0.35);
-    }
-    [data-testid="stBaseButton-secondary"] {
-        border-radius: 10px; font-weight: 600;
-    }
-
-    /* ---------- hero ---------- */
-    .cf-hero {
-        background: linear-gradient(135deg, #0b1220 0%, #134e4a 60%, #155e75 100%);
-        border-radius: 16px;
-        padding: 26px 32px 22px;
-        color: #e2e8f0;
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 10px;
-    }
-    .cf-hero::after {
-        content: "";
-        position: absolute; right: -70px; top: -70px;
-        width: 220px; height: 220px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(6,182,212,0.35), transparent 70%);
-    }
-    .cf-hero .cf-badge {
-        display: inline-block;
-        font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
-        text-transform: uppercase; color: #67e8f9;
-        background: rgba(6, 182, 212, 0.15);
-        border: 1px solid rgba(103, 232, 249, 0.35);
-        border-radius: 99px; padding: 4px 12px; margin-bottom: 12px;
-    }
-    .cf-hero h1 { color: #ffffff !important; font-size: 2.4rem; letter-spacing: 0.05em; margin: 0; line-height: 1.05; }
-    .cf-hero .cf-subtitle { font-size: 1.02rem; color: #94a3b8; margin: 4px 0 10px; }
-    .cf-hero .cf-ethics {
-        display: flex; align-items: center; gap: 8px;
-        font-size: 0.85rem; color: #cbd5e1;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 10px; padding: 8px 12px; width: fit-content;
-    }
-
-    /* ---------- section ---------- */
-    .cf-section {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 14px;
-        padding: 20px 22px;
-        margin: 12px 0;
-        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
-    }
-    .cf-section-title { font-size: 1.05rem; font-weight: 800; margin: 0 0 2px; }
-    .cf-section-hint { font-size: 0.8rem; color: var(--cf-muted); margin-bottom: 12px; }
-
-    /* ---------- metric cards ---------- */
-    .cf-metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    .cf-metric {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-left: 4px solid var(--cf-cyan);
-        border-radius: 12px;
-        padding: 14px 16px;
-        box-shadow: 0 1px 2px rgba(15,23,42,0.05);
-        transition: transform 0.12s ease, box-shadow 0.12s ease;
-    }
-    .cf-metric:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(15,23,42,0.08); }
-    .cf-metric .cf-metric-label {
-        font-size: 0.72rem; font-weight: 700; letter-spacing: 0.09em;
-        text-transform: uppercase; color: var(--cf-muted);
-    }
-    .cf-metric .cf-metric-value {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1.3rem; font-weight: 700; margin-top: 4px;
-    }
-    .cf-metric .cf-metric-sub { font-size: 0.78rem; color: var(--cf-muted); margin-top: 2px; }
-
-    /* ---------- prediction cards ---------- */
-    .cf-pred {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-left: 5px solid var(--cf-cyan);
-        border-radius: 12px;
-        padding: 12px 16px;
-        margin: 10px 0;
-        box-shadow: 0 1px 2px rgba(15,23,42,0.05);
-        transition: transform 0.12s ease, box-shadow 0.12s ease;
-    }
-    .cf-pred:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(15,23,42,0.08); }
-    .cf-pred-top { display: flex; justify-content: space-between; align-items: center; }
-    .cf-pred-area { font-weight: 800; font-size: 1.02rem; }
-    .cf-pred-pct { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1.1rem; }
-    .cf-pred-badge {
-        font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em;
-        border-radius: 99px; padding: 3px 10px; margin-left: 8px;
-    }
-    .cf-bar-track { background: #e8edf3; border-radius: 6px; height: 10px; margin-top: 10px; overflow: hidden; }
-    .cf-bar-fill { height: 100%; border-radius: 6px; }
-    .cf-bar-fill.hi {
-        background-image: linear-gradient(90deg, transparent, rgba(255,255,255,0.25));
-    }
-
-    /* ---------- case chip ---------- */
-    .cf-case-chip {
-        display: flex; flex-wrap: wrap; gap: 8px 12px;
-        background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 12px;
-        padding: 12px 16px; margin-bottom: 8px;
-        font-size: 0.86rem; color: #334155;
-    }
-    .cf-chip { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 3px 10px; }
-
-    /* ---------- ethical notice ---------- */
-    .cf-ethics-note {
-        margin-top: 14px; padding: 12px 16px;
-        border: 1px solid #d7e6f0;
-        border-left: 4px solid #94a3b8;
-        border-radius: 12px; background: #f1f5f9;
-        color: #475569; font-size: 0.85rem; line-height: 1.5;
-    }
-
-    /* ---------- form sections ---------- */
-    .cf-form-caption {
-        display: flex; align-items: center; gap: 8px;
-        font-size: 0.76rem; font-weight: 800; letter-spacing: 0.09em;
-        text-transform: uppercase; color: #475569;
-        margin: 16px 0 6px; padding-top: 12px; border-top: 1px solid #eef2f7;
-    }
-    .cf-form-caption:first-child { margin-top: 0; border-top: none; padding-top: 0; }
-    .cf-form-caption svg { flex-shrink: 0; color: #06b6d4; }
-    .cf-form-caption > span { flex: 1; }
-
-    /* ---------- priority legend ---------- */
-    .cf-legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 8px; }
-    .cf-legend-item { font-size: 0.75rem; color: #64748b; display: inline-flex; align-items: center; gap: 6px; }
-    .cf-dot { width: 10px; height: 10px; border-radius: 99px; display: inline-block; }
-
-    /* ---------- footer ---------- */
-    .cf-footer {
-        text-align: center; color: #94a3b8; font-size: 0.8rem;
-        margin: 26px 0 0; padding-top: 16px; border-top: 1px solid #e2e8f0;
-    }
-
-    /* ---------- tabs ---------- */
-    .stTabs [data-baseweb="tab-list"] { gap: 10px; }
-    .stTabs [data-baseweb="tab"] {
-        border-radius: 10px; padding: 6px 18px; font-weight: 700;
-    }
-    .stTabs [aria-selected="true"] { background: rgba(6,182,212,0.12); }
-
-    /* ---------- sidebar ---------- */
-    [data-testid="stSidebar"] { background: #0f172a; }
-    [data-testid="stSidebar"] .cf-sidebar-title {
-        font-size: 1.12rem; font-weight: 800; color: #ffffff; margin: 0;
-    }
-    [data-testid="stSidebar"] .cf-sidebar-sub { font-size: 0.78rem; color: #94a3b8; }
-    .cf-sidebar-box {
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 10px; padding: 10px 12px; margin: 10px 0;
-        font-size: 0.82rem;
-    }
-    .cf-sidebar-h { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #67e8f9; margin: 14px 0 4px; }
-
-    @media (max-width: 900px) {
-        .cf-metric-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-
 # ---------------------------------------------------------------------------
-# Sidebar
+# Sidebar (native widgets)
 # ---------------------------------------------------------------------------
 
 with st.sidebar:
-    st.markdown(
-        """
-        <div class="cf-sidebar-title">CASEFILE</div>
-        <div class="cf-sidebar-sub">Missing Person Location Prediction System</div>
-        """,
-        unsafe_allow_html=True,
+    st.title("CASEFILE")
+    st.caption("Missing Person Location Prediction System")
+
+    st.divider()
+
+    st.header("About")
+    st.write(
+        "A machine-learning decision aid that ranks the 10 search areas by "
+        "predicted probability, so field teams can prioritize where to look first."
     )
 
-    st.markdown('<div class="cf-sidebar-h">About</div>', unsafe_allow_html=True)
-    st.markdown(
-        '<div class="cf-sidebar-box">A machine-learning decision aid that ranks the 10 '
-        "search areas by predicted probability, so field teams can prioritize where to "
-        "look first.</div>",
-        unsafe_allow_html=True,
+    st.header("How to use")
+    st.write(
+        "1. Open **New Case Prediction**.\n\n"
+        "2. Enter the last-seen case details.\n\n"
+        "3. Generate the report and review the Top-5 areas."
     )
 
-    st.markdown('<div class="cf-sidebar-h">How to use</div>', unsafe_allow_html=True)
-    st.markdown(
-        '<div class="cf-sidebar-box">1. Open <strong>New Case Prediction</strong>.<br>'
-        "2. Enter the last-seen case details.<br>"
-        "3. Generate the report and review the Top-5 areas.</div>",
-        unsafe_allow_html=True,
+    st.header("Priority scale")
+    st.dataframe(
+        pd.DataFrame({"Priority": PRIORITY_LABELS}),
+        width="stretch",
+        hide_index=True,
     )
 
-    st.markdown('<div class="cf-sidebar-h">Priority scale</div>', unsafe_allow_html=True)
-    legend_html = '<div class="cf-legend">'
-    for label, color in zip(PRIORITY_LABELS, PRIORITY_COLORS):
-        legend_html += (
-            f'<span class="cf-legend-item"><span class="cf-dot" style="background:{color};"></span>'
-            f"{label}</span>"
-        )
-    legend_html += "</div>"
-    st.markdown(legend_html, unsafe_allow_html=True)
+    st.divider()
 
-    st.markdown('<div class="cf-sidebar-h">Ethics</div>', unsafe_allow_html=True)
-    st.markdown(
-        '<div class="cf-sidebar-box">Probabilities, not certainties. All data is 100% '
-        "synthetic &amp; fictional.</div>",
-        unsafe_allow_html=True,
-    )
+    st.caption("Probabilities, not certainties. All data is 100% synthetic & fictional.")
 
 # ---------------------------------------------------------------------------
-# Hero
+# Hero (native typography)
 # ---------------------------------------------------------------------------
 
-st.markdown(
-    """
-    <div class="cf-hero">
-        <span class="cf-badge">ML Prioritization Tool</span>
-        <h1>CASEFILE</h1>
-        <div class="cf-subtitle">Missing Person Location Prediction System</div>
-        <div class="cf-ethics">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fbbf24"
-                 stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-            Statistical prioritization aid — probabilities, not certainties
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+st.title("CASEFILE")
+st.caption("Missing Person Location Prediction System")
+st.info("Statistical prioritization aid — probabilities, not certainties.", icon=None)
+st.divider()
 
 # ---------------------------------------------------------------------------
 # Session state
@@ -537,75 +280,57 @@ st.markdown(
 
 if "last_prediction" not in st.session_state:
     st.session_state["last_prediction"] = None
-if "form_last_submitted" not in st.session_state:
-    st.session_state["form_last_submitted"] = False
 
 
-def render_results(model, label_encoder, summary, row, predictions=None):
-    """Render the filled-in report panel."""
+def render_results(model, label_encoder, row, predictions=None):
+    """Render the report panel using native Streamlit components."""
     if predictions is None:
         predictions = predict_top5(model, label_encoder, row)
 
-    st.markdown(
-        f"""
-        <div class="cf-case-chip">
-            <span class="cf-chip"><strong>Case</strong> {row['Case_ID']}</span>
-            <span class="cf-chip"><strong>Person</strong> {row['Age_Group']} · {row['Gender']}</span>
-            <span class="cf-chip"><strong>Day</strong> {row['Day']}</span>
-            <span class="cf-chip"><strong>Weather</strong> {row['Weather']}</span>
-            <span class="cf-chip"><strong>Usual</strong> {row['Usual_Area']}</span>
-            <span class="cf-chip"><strong>Previous</strong> {row['Previous_Area']}</span>
-        </div>
-        """,
-        unsafe_allow_html=True,
+    top = predictions[0]
+
+    st.success(
+        f"Highest priority area: **{top['area']}** at **{top['probability']}%** "
+        f"(#1 · {top['priority']} priority). Search here first."
     )
 
-    st.markdown(make_top_area_card(predictions[0]), unsafe_allow_html=True)
+    st.write(
+        f"**Case:** {row['Case_ID']}  ·  **Person:** {row['Age_Group']} · {row['Gender']}  ·  "
+        f"**Day:** {row['Day']}  ·  **Weather:** {row['Weather']}  ·  "
+        f"**Usual:** {row['Usual_Area']}  ·  **Previous:** {row['Previous_Area']}"
+    )
 
-    pred_html = ""
+    st.markdown("#### Ranked predictions")
     for p in predictions:
-        pred_html += f"""
-        <div class="cf-pred" style="border-left-color:{p['color']}">
-            <div class="cf-pred-top">
-                <span class="cf-pred-area">#{p['rank']} {p['area']}
-                    <span class="cf-pred-badge"
-                          style="color:{p['color']}; background:{p['color']}18; border:1px solid {p['color']}44;">{p['priority']}</span>
-                </span>
-                <span class="cf-pred-pct" style="color:{p['color']}">{p['probability']}%</span>
-            </div>
-            <div class="cf-bar-track">
-                <div class="cf-bar-fill hi" style="width:{p['probability']}%; background:{p['color']};"></div>
-            </div>
-        </div>
-        """
-    st.markdown(pred_html, unsafe_allow_html=True)
+        with st.container(border=True):
+            col_area, col_prob, col_prio = st.columns([2.4, 1, 1.2])
+            col_area.markdown(f"**#{p['rank']}** · {p['area']}")
+            col_prob.markdown(f"**{p['probability']}%**")
+            col_prio.write(p["priority"])
+            st.progress(min(p["probability"], 100.0) / 100.0)
 
+    st.markdown("#### Probability chart")
     st.plotly_chart(make_prediction_figure(predictions), width="stretch")
 
     with st.expander("Full 10-area ranking"):
-        all_df = predict_all_areas(model, label_encoder, row)
-        st.dataframe(all_df, width="stretch", hide_index=True)
+        st.dataframe(predict_all_areas(model, label_encoder, row), width="stretch", hide_index=True)
 
-    csv = pd.DataFrame(predictions).to_csv(index=False).encode("utf-8")
     st.download_button(
         "Download predictions (CSV)",
-        csv,
+        predictions_to_frame(predictions).to_csv(index=False).encode("utf-8"),
         file_name="casefile_predictions.csv",
         mime="text/csv",
-        icon=":material/download:",
     )
 
-    st.markdown(
-        '<div class="cf-ethics-note"><strong>Ethical notice:</strong> This output is a '
-        "statistical probability estimate for search prioritization only. It does not "
-        "constitute a definitive prediction or proof of location. Always cross-reference "
-        "with field intelligence.</div>",
-        unsafe_allow_html=True,
+    st.caption(
+        "Ethical notice: This output is a statistical probability estimate for search "
+        "prioritization only. It does not constitute a definitive prediction or proof of "
+        "location. Always cross-reference with field intelligence."
     )
 
 
 # ---------------------------------------------------------------------------
-# Tabs
+# Tabs (native)
 # ---------------------------------------------------------------------------
 
 tab_dashboard, tab_predictor = st.tabs(["Dashboard", "New Case Prediction"])
@@ -618,115 +343,75 @@ with tab_dashboard:
         _, _, summary = load_artifacts()
     best = next(m for m in summary["models"] if m["model"] == summary["best_model"])
 
-    st.markdown(
-        f"""
-        <div class="cf-section">
-            <div class="cf-section-title">Model Performance</div>
-            <div class="cf-section-hint">{summary["repeats"]} repeats · seeds [
-            {", ".join(map(str, summary["seeds"]))}] · {summary["n_cases"]} cases ·
-            {summary["n_features"]} features</div>
-            <div class="cf-metric-grid">
-                <div class="cf-metric" style="border-left-color:#06b6d4">
-                    <div class="cf-metric-label">Best Model</div>
-                    <div class="cf-metric-value">{best["model"]}</div>
-                    <div class="cf-metric-sub">by Top-1 accuracy</div>
-                </div>
-                <div class="cf-metric" style="border-left-color:#22c55e">
-                    <div class="cf-metric-label">Top-1 Accuracy</div>
-                    <div class="cf-metric-value">{fmt_pct_std(best["top1_mean"], best["top1_std"])}</div>
-                    <div class="cf-metric-sub">mean ± std</div>
-                </div>
-                <div class="cf-metric" style="border-left-color:#a855f7">
-                    <div class="cf-metric-label">Top-3 Accuracy</div>
-                    <div class="cf-metric-value">{fmt_pct_std(best["top3_mean"], best["top3_std"])}</div>
-                    <div class="cf-metric-sub">mean ± std</div>
-                </div>
-                <div class="cf-metric" style="border-left-color:#f97316">
-                    <div class="cf-metric-label">Top-5 Accuracy</div>
-                    <div class="cf-metric-value">{fmt_pct_std(best["top5_mean"], best["top5_std"])}</div>
-                    <div class="cf-metric-sub">mean ± std</div>
-                </div>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
+    st.subheader("Model Performance")
+    st.caption(
+        f"{summary['repeats']} repeats · seeds [{', '.join(map(str, summary['seeds']))}] · "
+        f"{summary['n_cases']} cases · {summary['n_features']} features"
     )
 
-    col_chart, col_radar = st.columns([1.15, 1])
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric("Best Model", best["model"], help="Chosen by top-1 accuracy.")
+    m2.metric("Top-1 Accuracy", fmt_pct_std(best["top1_mean"], best["top1_std"]),
+              help="Mean ± std across evaluation repeats.")
+    m3.metric("Top-3 Accuracy", fmt_pct_std(best["top3_mean"], best["top3_std"]),
+              help="Mean ± std across evaluation repeats.")
+    m4.metric("Top-5 Accuracy", fmt_pct_std(best["top5_mean"], best["top5_std"]),
+              help="Mean ± std across evaluation repeats.")
 
-    with col_chart:
-        st.markdown('<div class="cf-section"><div class="cf-section-title">Top-K Accuracy</div>'
-                    '<div class="cf-section-hint">Mean accuracy across 5 evaluation repeats</div>')
+    st.divider()
+
+    chart_col, radar_col = st.columns(2)
+
+    with chart_col:
+        st.subheader("Top-K Accuracy")
+        st.caption("Mean accuracy across evaluation repeats")
         st.plotly_chart(make_comparison_figure(summary["models"]), width="stretch")
-        st.markdown("</div>", unsafe_allow_html=True)
 
-    with col_radar:
-        st.markdown('<div class="cf-section"><div class="cf-section-title">Model Quality Radar</div>'
-                    '<div class="cf-section-hint">All metrics scaled to %</div>')
+    with radar_col:
+        st.subheader("Model Quality Radar")
+        st.caption("All five metrics scaled to %")
         st.plotly_chart(make_radar_figure(summary["models"]), width="stretch")
-        st.markdown("</div>", unsafe_allow_html=True)
 
-    st.markdown('<div class="cf-section"><div class="cf-section-title">Per-Model Metrics</div>'
-                '<div class="cf-section-hint">Sorted by Top-1 accuracy · Top-1 shown as mean ± std</div>')
+    st.divider()
+
+    st.subheader("Per-Model Metrics")
+    st.caption("Sorted by Top-1 accuracy · Top-1 shown as mean ± std")
     rows = []
     for m in sorted(summary["models"], key=lambda x: x["top1_mean"], reverse=True):
         rows.append({
             "Model": m["model"],
-            "Top-1": fmt_pct_std(m["top1_mean"], m["top1_std"]),
-            "Top-3": fmt_pct(m["top3_mean"]),
-            "Top-5": fmt_pct(m["top5_mean"]),
-            "Macro F1": fmt_pct(m["macro_f1_mean"]),
-            "Weighted F1": fmt_pct(m["weighted_f1_mean"]),
+            "Top-1 (%)": fmt_pct_std(m["top1_mean"], m["top1_std"]),
+            "Top-3 (%)": fmt_pct(m["top3_mean"]),
+            "Top-5 (%)": fmt_pct(m["top5_mean"]),
+            "Macro F1 (%)": fmt_pct(m["macro_f1_mean"]),
+            "Weighted F1 (%)": fmt_pct(m["weighted_f1_mean"]),
         })
     st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
-    st.markdown("</div>", unsafe_allow_html=True)
 
-    st.markdown(
-        '<div class="cf-ethics-note"><strong>Ethical notice:</strong> All data is 100% '
-        "synthetic &amp; fictional. Metrics reflect repeated cross-validation on simulated "
-        "cases only and are not a measure of real-world field performance.</div>",
-        unsafe_allow_html=True,
+    st.caption(
+        "Ethical notice: All data is 100% synthetic & fictional. Metrics reflect repeated "
+        "cross-validation on simulated cases only and are not a measure of real-world field "
+        "performance."
     )
 
 # ===========================================================================
 # PREDICTOR
 # ===========================================================================
 with tab_predictor:
-    st.markdown(
-        '<div class="cf-section"><div class="cf-section-title">New Case Prediction</div>'
-        '<div class="cf-section-hint">Enter case details below to rank the 10 search areas '
-        "by predicted likelihood</div>"
-    )
+    st.subheader("New Case Prediction")
+    st.caption("Enter case details below to rank the 10 search areas by predicted likelihood")
 
     form_col, result_col = st.columns([1, 1.05])
 
     with form_col:
         with st.form("case-form"):
-            st.markdown(
-                '''
-                <div class="cf-form-caption">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 3"/></svg>
-                    <span>Person</span>
-                </div>
-                ''',
-                unsafe_allow_html=True,
-            )
+            st.markdown("**Person**")
             c1, c2 = st.columns(2)
-            age_group = c1.selectbox("Age Group", ["18-25", "26-35", "36-45", "46-55", "56+"], index=1,
-                                     help="Age band of the missing person.")
+            age_group = c1.selectbox("Age Group", ["18-25", "26-35", "36-45", "46-55", "56+"],
+                                     index=1, help="Age band of the missing person.")
             gender = c2.selectbox("Gender", ["Male", "Female", "Other"], index=0)
 
-            st.markdown(
-                '''
-                <div class="cf-form-caption">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
-                    <span>Location</span>
-                </div>
-                ''',
-                unsafe_allow_html=True,
-            )
+            st.markdown("**Location**")
             c1, c2 = st.columns(2)
             lat = c1.number_input("Last Latitude", value=23.2500, step=0.0001, format="%.4f",
                                   help="GPS latitude where the person was last seen.")
@@ -738,16 +423,7 @@ with tab_predictor:
             previous_area = c2.selectbox("Previous Area", AREAS, index=4,
                                          help="Area from the person's latest known movement.")
 
-            st.markdown(
-                '''
-                <div class="cf-form-caption">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    <span>Time &amp; Conditions</span>
-                </div>
-                ''',
-                unsafe_allow_html=True,
-            )
+            st.markdown("**Time & Conditions**")
             c1, c2 = st.columns(2)
             last_seen_time = c1.text_input("Last Seen Time (HH:MM)", value="14:30",
                                            help="24-hour format, e.g. 14:30.")
@@ -756,30 +432,20 @@ with tab_predictor:
                                 "Friday", "Saturday", "Sunday"], index=4)
             weather = st.selectbox("Weather", ["Clear", "Cloudy", "Rain", "Fog"], index=0)
 
-            st.markdown(
-                '''
-                <div class="cf-form-caption">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
-                    <span>Movement</span>
-                </div>
-                ''',
-                unsafe_allow_html=True,
-            )
+            st.markdown("**Movement**")
             c1, c2, c3 = st.columns(3)
-            avg_distance = c1.number_input("Avg Distance (km)", value=9.0, step=0.1, min_value=0.0,
+            avg_distance = c1.number_input("Avg Distance (km)", value=9.0, min_value=0.0, step=0.1,
                                            help="Average distance covered between sightings.")
-            avg_speed = c2.number_input("Avg Speed (km/h)", value=20.0, step=0.1, min_value=0.0,
+            avg_speed = c2.number_input("Avg Speed (km/h)", value=20.0, min_value=0.0, step=0.1,
                                         help="Average movement speed of the person.")
-            time_since = c3.number_input("Time Since Seen (hrs)", value=4.0, min_value=0.1, step=0.1,
-                                         help="Hours elapsed since the last sighting.")
+            time_since = c3.number_input("Time Since Seen (hrs)", value=4.0, min_value=0.1,
+                                         step=0.1, help="Hours elapsed since the last sighting.")
 
             submitted = st.form_submit_button("Generate Prediction Report", type="primary",
                                               width="stretch")
-        st.markdown("</div>", unsafe_allow_html=True)
 
     with result_col:
-        model, label_encoder, summary = load_artifacts()
+        model, label_encoder, _ = load_artifacts()
 
         if submitted:
             row = build_case_dict(age_group, gender, lat, lon, last_seen_time, day, weather,
@@ -787,40 +453,23 @@ with tab_predictor:
             with st.spinner("Computing area probabilities..."):
                 predictions = predict_top5(model, label_encoder, row)
             st.session_state["last_prediction"] = {"row": row, "predictions": predictions}
-            st.session_state["form_last_submitted"] = True
             st.toast("Prediction report generated")
 
-        st.markdown(
-            '<div class="cf-section"><div class="cf-section-title">Probable Location Report</div>'
-            '<div class="cf-section-hint">Top-5 search areas by model likelihood</div>'
-        )
+        st.subheader("Probable Location Report")
+        st.caption("Top-5 search areas by model likelihood")
 
         last = st.session_state["last_prediction"]
         if last is None:
-            st.markdown(
-                '''
-                <div style="text-align:center; color:#94a3b8; padding:64px 16px;">
-                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1"
-                         stroke-width="1.5" style="margin-bottom:10px;">
-                        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
-                    </svg>
-                    <div>Fill in the case form and hit <strong>Generate Prediction Report</strong>
-                    to see the Top-5 probable areas.</div>
-                </div>
-                ''',
-                unsafe_allow_html=True,
+            st.info(
+                "Fill in the case form and press **Generate Prediction Report** "
+                "to see the Top-5 probable areas."
             )
         else:
-            render_results(model, label_encoder, summary,
-                           last["row"], predictions=last["predictions"])
-        st.markdown("</div>", unsafe_allow_html=True)
+            render_results(model, label_encoder, last["row"], predictions=last["predictions"])
 
 # ---------------------------------------------------------------------------
 # Footer
 # ---------------------------------------------------------------------------
 
-st.markdown(
-    '<div class="cf-footer">CASEFILE · Missing Person Location Prediction System '
-    "· All data is 100% synthetic &amp; fictional</div>",
-    unsafe_allow_html=True,
-)
+st.divider()
+st.caption("CASEFILE · Missing Person Location Prediction System · All data is 100% synthetic & fictional")
